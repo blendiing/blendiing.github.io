@@ -58,7 +58,53 @@ document.addEventListener('DOMContentLoaded',function(){
     });
   },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
   reveals.forEach(function(el){observer.observe(el);});
+
+  // 스크롤 탑 버튼
+  const btn=document.getElementById('scrollTopBtn');
+  window.addEventListener('scroll',function(){
+    btn.classList.toggle('show', window.scrollY>400);
+  });
+  btn.addEventListener('click',function(){
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
 });
 </script>
+
+<style>
+#scrollTopBtn{
+  position:fixed;
+  bottom:36px;
+  right:36px;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 4px 16px rgba(45,92,222,.35);
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .3s,transform .3s;
+  pointer-events:none;
+  z-index:999;
+}
+#scrollTopBtn.show{
+  opacity:1;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+#scrollTopBtn:hover{
+  background:var(--accent-soft);
+}
+#scrollTopBtn svg{stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+
+<button id="scrollTopBtn" aria-label="맨 위로">
+  <svg width="20" height="20" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
 </body>
 </html></
